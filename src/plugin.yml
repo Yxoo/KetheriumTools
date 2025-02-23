@@ -1,0 +1,18 @@
+main: fr.yxoo.KeteriumTools
+name: KeteriumTools
+version: 1.0
+author: Yxoo
+api-version: 1.21
+softdepend: [PlaceholderAPI]
+
+commands:
+  ketertools:
+    description: Commande principale de KeteriumTools
+    usage: /ketertools <reload|placeholders>
+    permission: ketertools.admin
+    aliases: [keter]
+
+permissions:
+  ketertools.admin:
+    description: Permet d'utiliser les commandes administrateur du plugin
+    default: op

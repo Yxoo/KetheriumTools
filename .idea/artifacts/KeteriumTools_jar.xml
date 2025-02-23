@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KeteriumTools:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/KeteriumTools_jar</output-path>
+    <root id="archive" name="KeteriumTools.jar">
+      <element id="module-output" name="KeteriumTools" />
+      <element id="extracted-dir" path="D:/API/spigot-api-1.21.4-R0.1-20250125.105843-29-shaded.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
