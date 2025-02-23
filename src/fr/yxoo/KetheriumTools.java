@@ -1,6 +1,7 @@
 package fr.yxoo;
 
 import fr.yxoo.listeners.Configs;
+import fr.yxoo.listeners.onJoin;
 import fr.yxoo.placeholders.jobsPlaceholder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
@@ -30,8 +31,10 @@ public class KetheriumTools extends JavaPlugin implements Listener {
             command.setExecutor(executor);
             command.setTabCompleter(new KetherToolsTabCompleter());
         }
+
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new Configs(this), this);
+        getServer().getPluginManager().registerEvents(new onJoin(this, config), this);
         new jobsPlaceholder().register();
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {

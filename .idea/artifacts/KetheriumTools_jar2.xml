@@ -4,7 +4,7 @@
     <root id="archive" name="KetheriumTools.jar">
       <element id="module-output" name="KetheriumTools" />
       <element id="extracted-dir" path="D:/API/spigot-api-1.21.4-R0.1-20250125.105843-29-shaded.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="D:/API/PlaceholderAPI-2.11.6.jar" path-in-jar="/" />
+      <element id="library" level="project" name="PlaceholderAPI-2.11.6" />
     </root>
   </artifact>
 </component>

@@ -7,3 +7,5 @@ onDisableMessage:
 reloadMessage:
   enable: true
   message: "&cKetheriumTools reloaded !"
+
+jobsAutojoin: true

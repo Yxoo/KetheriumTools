@@ -14,6 +14,7 @@ public class Configs implements Listener {
 
     public String reloadPath = "reloadMessage.enable";
     public String reloadMessagePath = "reloadMessage.message";
+    public String jobsAutojoin = "jobsAutojoin";
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

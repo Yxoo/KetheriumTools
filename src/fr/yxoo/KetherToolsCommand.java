@@ -1,6 +1,10 @@
 package fr.yxoo;
 
 import fr.yxoo.listeners.Configs;
+import me.clip.placeholderapi.libs.kyori.adventure.text.Component;
+import me.clip.placeholderapi.libs.kyori.adventure.text.format.NamedTextColor;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,17 +66,24 @@ public class KetherToolsCommand implements CommandExecutor {
     }
 
     private void handelPlaceholders(CommandSender sender) {
-        String key = "%keter_";
+        String key = "%kether_";
 
-        StringBuilder message = new StringBuilder()
-                .append("§a=== KetherTools Placeholders ===\n");
-        for (int i = 0; i < placeholders.length; i++)
-        {
-            message.append("§a" + key + placeholders[i] [0].toString() + " §6➜ §f" + placeholders[i] [1].toString() + "\n");
+        ComponentBuilder message = new ComponentBuilder("§a=== KetherTools Placeholders ===\n");
+
+        for (int i = 0; i < placeholders.length; i++) {
+            message.append(key + placeholders[i][0])
+                    .color(ChatColor.GREEN)
+                    .event(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, key + placeholders[i][0]))
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                            new ComponentBuilder("Cliquez pour copier !").color(ChatColor.GRAY).create()))
+                    .append(" ➜ ").color(ChatColor.GOLD)
+                    .append(placeholders[i][1]).color(ChatColor.WHITE)
+                    .append("\n").reset();
         }
-        message.append("§a===============================\n");;
 
-        sender.sendMessage(message.toString());
+        message.append("§a===============================");
+
+        sender.spigot().sendMessage(message.create());
     }
 
 }
