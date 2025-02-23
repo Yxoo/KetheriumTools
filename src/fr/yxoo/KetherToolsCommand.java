@@ -57,8 +57,8 @@ public class KetherToolsCommand implements CommandExecutor {
             plugin.reloadConfig();
             plugin.reloadConfig();
             plugin.onEnable();
-            if (plugin.getConfig().getBoolean(config.reloadPath))
-                sender.sendMessage(plugin.getConfig().getString(config.reloadMessagePath));
+            if (plugin.getConfig().getString(config.reloadMessagePath).length() > 0)
+                sender.sendMessage(plugin.getConfig().getString(config.reloadMessagePath).replace("&", "§"));
         } catch (Exception e) {
             sender.sendMessage("§cUne erreur est survenue lors du rechargement du plugin.");
             e.printStackTrace();

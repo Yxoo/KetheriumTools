@@ -1,11 +1,6 @@
-onEnableMessage:
-  enable: true
-  message: "KetheriumTools activated !"
-onDisableMessage:
-  enable: true
-  message: "KetheriumTools desactivated !"
-reloadMessage:
-  enable: true
-  message: "&cKetheriumTools reloaded !"
+onEnableMessage: "KetheriumTools activated !"
+onDisableMessage: "KetheriumTools desactivated !"
+reloadMessage: "&aKetheriumTools reloaded !"
 
 jobsAutojoin: true
+jobsJoinMessage: "&aVous avez rejoins un métier !"

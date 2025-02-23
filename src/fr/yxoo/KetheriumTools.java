@@ -12,10 +12,8 @@ public class KetheriumTools extends JavaPlugin implements Listener {
     private static JavaPlugin instance;
     private Configs config;
 
-    public String enablePath = "onEnableMessage.enable";
-    public String enableMessagePath = "onEnableMessage.message";
-    public String disablePath = "onDisableMessage.enable";
-    public String disableMessagePath = "onDisableMessage.message";
+    public String enableMessagePath = "onEnableMessage";
+    public String disableMessagePath = "onDisableMessage";
 
     @Override
     public void onEnable() {
@@ -42,14 +40,16 @@ public class KetheriumTools extends JavaPlugin implements Listener {
             return;
         }
 
-        if (this.getConfig().getBoolean(enablePath))
+        if (!this.getConfig().getString(enableMessagePath).isEmpty())
             System.out.println("\u001b[32m" + this.getConfig().getString(enableMessagePath) + "\u001b[37m");
 
     }
 
     @Override
     public void onDisable() {
-        if (this.getConfig().getBoolean(disablePath))
+        saveDefaultConfig();
+
+        if (!this.getConfig().getString(disableMessagePath).isEmpty())
             System.out.println("\u001b[31m" + this.getConfig().getString(disableMessagePath) + "\u001b[37m");
     }
 

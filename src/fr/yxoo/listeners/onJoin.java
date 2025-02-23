@@ -24,11 +24,14 @@ public class onJoin implements Listener {
 
         if (!player.hasPlayedBefore() && plugin.getConfig().getBoolean(config.jobsAutojoin))
         {
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "jobs join miner");
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "jobs join hunter");
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "jobs join farmer");
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "jobs join fisherman");
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "jobs join woodcutter");
+            player.performCommand("jobs join miner");
+            player.performCommand("jobs join hunter");
+            player.performCommand("jobs join farmer");
+            player.performCommand("jobs join fisherman");
+            player.performCommand("jobs join woodcutter");
+
+            if (!plugin.getConfig().getString(config.jobsJoinMessage).isEmpty())
+                player.sendMessage(plugin.getConfig().getString(config.jobsJoinMessage).replace("&", "§"));
         }
     }
 }

@@ -12,9 +12,9 @@ public class Configs implements Listener {
         this.plugin = plugin;
     }
 
-    public String reloadPath = "reloadMessage.enable";
-    public String reloadMessagePath = "reloadMessage.message";
+    public String reloadMessagePath = "reloadMessage";
     public String jobsAutojoin = "jobsAutojoin";
+    public String jobsJoinMessage = "jobsJoinMessage";
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
