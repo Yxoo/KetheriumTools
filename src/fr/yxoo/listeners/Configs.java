@@ -1,14 +1,14 @@
 package fr.yxoo.listeners;
 
-import fr.yxoo.KeteriumTools;
+import fr.yxoo.KetheriumTools;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Configs implements Listener {
-    private final KeteriumTools plugin;
+    private final KetheriumTools plugin;
 
-    public Configs(KeteriumTools plugin) {
+    public Configs(KetheriumTools plugin) {
         this.plugin = plugin;
     }
 

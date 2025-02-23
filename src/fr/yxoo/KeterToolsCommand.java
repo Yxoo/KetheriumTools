@@ -1,23 +1,15 @@
 package fr.yxoo;
 
 import fr.yxoo.listeners.Configs;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class KeterToolsCommand implements CommandExecutor {
-    private final KeteriumTools plugin;
+    private final KetheriumTools plugin;
     private final Configs config;
 
-    public KeterToolsCommand(KeteriumTools plugin, Configs config) {
+    public KeterToolsCommand(KetheriumTools plugin, Configs config) {
         this.plugin = plugin;
         this.config = config;
     }
@@ -30,7 +22,7 @@ public class KeterToolsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("ketertools.admin")) {
+        if (!sender.hasPermission("kethertools.admin")) {
             sender.sendMessage("§cVous n'avez pas la permission d'utiliser cette commande.");
             return true;
         }
@@ -48,7 +40,7 @@ public class KeterToolsCommand implements CommandExecutor {
                 handelPlaceholders(sender);
                 break;
             default:
-                sender.sendMessage("§cCommande inconnue. Utilisation: /ketertools <reload|update>");
+                sender.sendMessage("§cCommande inconnue. Utilisation: /kethertools <reload|update>");
                 break;
         }
 
@@ -73,7 +65,7 @@ public class KeterToolsCommand implements CommandExecutor {
         String key = "%keter_";
 
         StringBuilder message = new StringBuilder()
-                .append("§a=== KeterTools Placeholders ===\n");
+                .append("§a=== KetherTools Placeholders ===\n");
         for (int i = 0; i < placeholders.length; i++)
         {
             message.append("§a" + key + placeholders[i] [0].toString() + " §6➜ §f" + placeholders[i] [1].toString() + "\n");

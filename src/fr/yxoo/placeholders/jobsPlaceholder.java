@@ -1,6 +1,6 @@
 package fr.yxoo.placeholders;
 
-import fr.yxoo.KeteriumTools;
+import fr.yxoo.KetheriumTools;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
@@ -10,7 +10,7 @@ public class jobsPlaceholder extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "keter";
+        return "kether";
     }
 
     @Override
@@ -54,10 +54,10 @@ public class jobsPlaceholder extends PlaceholderExpansion {
 
                     default:
 
-                        KeteriumTools.logWarning(
-                                "KeteriumTools : placeholder inconnu : " + identifier
+                        KetheriumTools.logWarning(
+                                "KetheriumTools : placeholder inconnu : " + identifier
                         );
-                        return "%keter_" + identifier + "%";
+                        return "%kether_" + identifier + "%";
 
                 }
 
@@ -65,8 +65,8 @@ public class jobsPlaceholder extends PlaceholderExpansion {
 
         } catch (Exception e){
 
-            KeteriumTools.logWarning(
-                    "KeteriuemTools : erreur avec le placeholder : " + identifier +
+            KetheriumTools.logWarning(
+                    "KetheriuemTools : erreur avec le placeholder : " + identifier +
                             " :: " + e.toString()
             );
             return "";

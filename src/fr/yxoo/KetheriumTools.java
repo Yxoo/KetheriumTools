@@ -7,7 +7,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class KeteriumTools extends JavaPlugin implements Listener {
+public class KetheriumTools extends JavaPlugin implements Listener {
     private static JavaPlugin instance;
     private Configs config;
 
@@ -24,18 +24,18 @@ public class KeteriumTools extends JavaPlugin implements Listener {
 
         saveDefaultConfig();
 
-        PluginCommand command = getCommand("ketertools");
+        PluginCommand command = getCommand("kethertools");
         if (command != null) {
             KeterToolsCommand executor = new KeterToolsCommand(this, config);
             command.setExecutor(executor);
-            command.setTabCompleter(new KeterToolsTabCompleter());
+            command.setTabCompleter(new KetherToolsTabCompleter());
         }
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new Configs(this), this);
         new jobsPlaceholder().register();
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            logSevere("KeteriumTools : PlaceholderAPI manquant !");
+            logSevere("KetheriumTools : PlaceholderAPI manquant !");
             return;
         }
 

@@ -1,9 +1,9 @@
 onEnableMessage:
   enable: true
-  message: "KeteriumTools activated !"
+  message: "KetheriumTools activated !"
 onDisableMessage:
   enable: true
-  message: "KeteriumTools desactivated !"
+  message: "KetheriumTools desactivated !"
 reloadMessage:
   enable: true
-  message: "&cKeteriumTools reloaded !"
+  message: "&cKetheriumTools reloaded !"
