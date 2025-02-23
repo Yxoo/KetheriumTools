@@ -66,7 +66,7 @@ public class jobsPlaceholder extends PlaceholderExpansion {
         } catch (Exception e){
 
             KetheriumTools.logWarning(
-                    "KetheriuemTools : erreur avec le placeholder : " + identifier +
+                    "KetheriumTools : erreur avec le placeholder : " + identifier +
                             " :: " + e.toString()
             );
             return "";

@@ -5,11 +5,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class KeterToolsCommand implements CommandExecutor {
+public class KetherToolsCommand implements CommandExecutor {
     private final KetheriumTools plugin;
     private final Configs config;
 
-    public KeterToolsCommand(KetheriumTools plugin, Configs config) {
+    public KetherToolsCommand(KetheriumTools plugin, Configs config) {
         this.plugin = plugin;
         this.config = config;
     }

@@ -26,7 +26,7 @@ public class KetheriumTools extends JavaPlugin implements Listener {
 
         PluginCommand command = getCommand("kethertools");
         if (command != null) {
-            KeterToolsCommand executor = new KeterToolsCommand(this, config);
+            KetherToolsCommand executor = new KetherToolsCommand(this, config);
             command.setExecutor(executor);
             command.setTabCompleter(new KetherToolsTabCompleter());
         }
