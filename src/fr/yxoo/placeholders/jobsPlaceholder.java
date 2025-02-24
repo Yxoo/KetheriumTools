@@ -3,7 +3,14 @@ package fr.yxoo.placeholders;
 import fr.yxoo.KetheriumTools;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.UUID;
 
 public class jobsPlaceholder extends PlaceholderExpansion {
 
@@ -40,6 +47,19 @@ public class jobsPlaceholder extends PlaceholderExpansion {
 
                         String ph = PlaceholderAPI.setPlaceholders(player, "%jobsr_user_" + keys[0] + "_"+ keys[1]+"%");
                         return ph.replace(",", "");
+                    case "jfexp":
+
+                        String exp = PlaceholderAPI.setPlaceholders(player, "%jobsr_user_jexp_"+ keys[1]+"%");
+                        exp = exp.replace(",", "");
+                        double newexp = Double.parseDouble(exp);
+                        return formatNumber(newexp);
+
+                    case "jfmaxexp":
+
+                        String exp2 = PlaceholderAPI.setPlaceholders(player, "%jobsr_user_jmaxexp_"+ keys[1]+"%");
+                        exp2 = exp2.replace(",", "");
+                        double maxexp = Double.parseDouble(exp2);
+                        return formatNumber(maxexp);
 
                     case "progress":
 
@@ -62,6 +82,27 @@ public class jobsPlaceholder extends PlaceholderExpansion {
                 }
 
             }
+            if (keys.length == 3){
+                //demande d'un placeholder du type :: kether_jtop_Chasseur_1
+
+                if (keys[0].toString().equals("jtop")) {
+                    String playerName = PlaceholderAPI.setPlaceholders(player, "%jobsr_" + keys[0] + "_name_" + keys[1] + "_" + keys[2] + "%");
+                    player = Bukkit.getPlayer(playerName);
+                    if (player != null) {
+                        return player.getUniqueId().toString();
+                    }
+                    else {
+                        return getUUIDFromNameAPI(playerName).toString();
+                    }
+                }
+                else {
+                    KetheriumTools.logWarning(
+                            "KetheriumTools : placeholder inconnu : " + identifier
+                    );
+                    return "%kether_" + identifier + "%";
+                }
+
+            }
 
         } catch (Exception e){
 
@@ -73,8 +114,42 @@ public class jobsPlaceholder extends PlaceholderExpansion {
 
         }
 
+
+
         return "";
 
+    }
+
+    public static String formatNumber(double number) {
+        if (number >= 1_000_000) {
+            return String.format("%.1fM", number / 1_000_000);
+        }
+        if (number >= 1000) {
+            return String.format("%.1fK", number / 1000);
+        }
+        return String.valueOf(number);
+    }
+
+    public static UUID getUUIDFromNameAPI(String playerName) {
+        try {
+            URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + playerName);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String response = reader.readLine();
+            reader.close();
+
+            // Exemple de réponse : {"id":"d2a1b5c3e4f5a6b7c8d9e0f1a2b3c4d5","name":"PlayerName"}
+            String uuidString = response.split("\"")[3]; // Extrait l'UUID de la réponse JSON
+            return UUID.fromString(uuidString.replaceFirst(
+                    "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
+                    "$1-$2-$3-$4-$5"
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

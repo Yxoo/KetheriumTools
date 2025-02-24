@@ -21,7 +21,11 @@ public class KetherToolsCommand implements CommandExecutor {
     private static final String[] [] placeholders =
             {
                     {"jexp_(job)%", "Affichage simple de l'exp actuel dans le job (sans virgules)."},
-                    {"progress_(job)%", "Affichage en pourcentage de la progression actuel dans le job."}
+                    {"progress_(job)%", "Affichage en pourcentage de la progression actuel dans le job."},
+                    {"jtop_(job)_(number[1-15])%", "Renvois l'UUID du joueur"},
+                    {"jfexp_(job)%", "Affichage simple de l'exp actuel dans le job (formatté)."},
+                    {"jfmaxexp_(job)%", "Affichage simple de l'exp requis dans le job (formatté)."}
+
             };
 
     @Override
