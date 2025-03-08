@@ -16,6 +16,10 @@ public class Configs implements Listener {
     public String jobsAutojoin = "jobsAutojoin";
     public String jobsJoinMessage = "jobsJoinMessage";
 
+    public String progressBarSize = "jobsProgressBar.size";
+    public String progressBarvalid = "jobsProgressBar.validChar";
+    public String progressBarinvalid = "jobsProgressBar.invalidChar";
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         this.plugin.getConfig();

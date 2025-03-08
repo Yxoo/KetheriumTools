@@ -4,3 +4,21 @@ reloadMessage: "&aKetheriumTools reloaded !"
 
 jobsAutojoin: true
 jobsJoinMessage: "&aVous avez rejoins un métier !"
+
+jobs:
+  - "miner"
+  - "hunter"
+  - "farmer"
+  - "woodcutter"
+  - "fisherman"
+
+Ranks:
+  rank1:
+    char: ""
+    name: "admin"
+
+
+jobsProgressBar:
+  size: 20
+  validChar: 'ㅊ'
+  invalidChar: '╝'

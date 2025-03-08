@@ -21,10 +21,15 @@ public class KetherToolsCommand implements CommandExecutor {
     private static final String[] [] placeholders =
             {
                     {"jexp_(job)%", "Affichage simple de l'exp actuel dans le job (sans virgules)."},
-                    {"progress_(job)%", "Affichage en pourcentage de la progression actuel dans le job."},
-                    {"jtop_(job)_(number[1-15])%", "Renvois l'UUID du joueur"},
                     {"jfexp_(job)%", "Affichage simple de l'exp actuel dans le job (formatté)."},
-                    {"jfmaxexp_(job)%", "Affichage simple de l'exp requis dans le job (formatté)."}
+                    {"jlevel_max%", "Affichage simple du niveau le plus haut atteint dans les jobs."},
+                    {"jfmaxexp_(job)%", "Affichage simple de l'exp requis dans le job (formatté)."},
+                    {"progress_(job)%", "Affichage en pourcentage de la progression actuel dans le job."},
+                    {"progressbar_(job)%", "Affichage en barre de progression l'exp du job."},
+                    {"jtop_(job)_(number[1-15])%", "Renvois l'UUID du joueur"},
+                    {"baltop_uuid_(number)%", "Renvois l'UUID du joueur a cette place dans le baltop."},
+                    {"baltop_displayname_(number)%", "Renvois le displayname du joueur a cette place dans le baltop."},
+                    {"dimensiontime_{world}_{target_name(placeholder)}%", "Temps restant dans le world."}
 
             };
 
