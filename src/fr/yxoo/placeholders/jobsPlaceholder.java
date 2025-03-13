@@ -1,5 +1,6 @@
 package fr.yxoo.placeholders;
 
+import fr.yxoo.DatabaseManager;
 import fr.yxoo.KetheriumTools;
 import fr.yxoo.listeners.Configs;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -22,10 +23,12 @@ import java.util.regex.Pattern;
 public class jobsPlaceholder extends PlaceholderExpansion {
     private static KetheriumTools plugin = null;
     private static Configs config = null;
+    private static DatabaseManager bdd = null;
 
-    public jobsPlaceholder(KetheriumTools plugin, Configs config) {
+    public jobsPlaceholder(KetheriumTools plugin, Configs config, DatabaseManager bdd) {
         this.plugin = plugin;
         this.config = config;
+        this.bdd = bdd;
     }
 
     @Override
@@ -160,6 +163,43 @@ public class jobsPlaceholder extends PlaceholderExpansion {
                                 }
 
                             }
+                        case "hasreward":
+                            UUID playerUUID = player.getUniqueId();
+                            String job = keys[1];
+                            int number = keys.length > 2 ? Integer.parseInt(keys[2]) : 1;
+                            FileConfiguration configuration = plugin.getConfig();
+
+                            List<String> jobs = plugin.getConfig().getStringList("jobs");
+                            if (jobs.contains(job)) {
+                                if (bdd.hasReward(playerUUID, job, number)) {
+                                    return "Yes";
+                                } else {
+                                    return "No";
+                                }
+                            } else {
+                                return "Job invalide.";
+                            }
+                        case "player":
+                            if (keys[1].equals("rank")) {
+                                if (keys[2].equals("gift")) {
+                                    String DisplayName = PlaceholderAPI.setPlaceholders(player, "%player_displayname%");
+                                    String[] SplittedDisplayName = DisplayName.split(":");
+
+                                    if (SplittedDisplayName.length > 1) {
+                                        String rank = SplittedDisplayName[1];
+                                        KetheriumTools.logInfo("rank = " + rank);
+                                        String gift = Integer.toString(getPlayerRankGift(rank));
+                                        KetheriumTools.logInfo("gift = " + gift);
+                                        if (!gift.equals("0"))
+                                            return gift;
+                                    } else {
+                                        String gift = getPlayerRankGiftWithoutPrefix(DisplayName);
+                                        if (!gift.equals("0"))
+                                            return gift;
+                                    }
+                                }
+
+                            }
                         default:
                             KetheriumTools.logWarning("KetheriumTools : placeholder inconnu : " + identifier);
                             return "%kether_" + identifier + "%";
@@ -171,6 +211,38 @@ public class jobsPlaceholder extends PlaceholderExpansion {
             return "";
         }
         return "";
+    }
+
+    private int getPlayerRankGift(String rank) {
+        FileConfiguration config = plugin.getConfig();
+        ConfigurationSection ranksSection = config.getConfigurationSection("Ranks");
+
+        if (ranksSection != null) {
+            for (String rankKey : ranksSection.getKeys(false)) {
+                String name = ranksSection.getString(rankKey + ".name");
+                if (rank.equals(name)) {
+                    return ranksSection.getInt(rankKey + ".gift", 0);
+                }
+            }
+        }
+        return 0;
+    }
+
+    private String getPlayerRankGiftWithoutPrefix(String playerName) {
+        FileConfiguration config = plugin.getConfig();
+        ConfigurationSection ranksSection = config.getConfigurationSection("Ranks");
+
+        if (ranksSection != null) {
+            for (String rankKey : ranksSection.getKeys(false)) {
+                ConfigurationSection rankConfig = ranksSection.getConfigurationSection(rankKey);
+                String charValue = rankConfig.getString("char");
+                String giftValue = Integer.toString(rankConfig.getInt("gift"));
+                if (playerName.contains(charValue)) {
+                    return giftValue;
+                }
+            }
+        }
+        return "No Rank find.";
     }
 
     public static String formatNumber(double number) {

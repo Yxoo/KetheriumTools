@@ -1,21 +1,31 @@
 package fr.yxoo;
 
 import fr.yxoo.listeners.Configs;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.libs.kyori.adventure.text.Component;
 import me.clip.placeholderapi.libs.kyori.adventure.text.format.NamedTextColor;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 public class KetherToolsCommand implements CommandExecutor {
     private final KetheriumTools plugin;
     private final Configs config;
+    private final DatabaseManager bdd;
 
-    public KetherToolsCommand(KetheriumTools plugin, Configs config) {
+    public KetherToolsCommand(KetheriumTools plugin, Configs config, DatabaseManager bdd) {
         this.plugin = plugin;
         this.config = config;
+        this.bdd = bdd;
     }
 
     private static final String[] [] placeholders =
@@ -29,6 +39,7 @@ public class KetherToolsCommand implements CommandExecutor {
                     {"jtop_(job)_(number[1-15])%", "Renvois l'UUID du joueur"},
                     {"baltop_uuid_(number)%", "Renvois l'UUID du joueur a cette place dans le baltop."},
                     {"baltop_displayname_(number)%", "Renvois le displayname du joueur a cette place dans le baltop."},
+                    {"hasreward_(job)_(reward number)%", "Renvois 'Yes' si le joueur a deja recuperer la récompense, sinon 'No'."},
                     {"dimensiontime_{world}_{target_name(placeholder)}%", "Temps restant dans le world."}
 
             };
@@ -50,10 +61,13 @@ public class KetherToolsCommand implements CommandExecutor {
                 handleReload(sender);
                 break;
             case "placeholders":
-                handelPlaceholders(sender);
+                handlePlaceholders(sender);
+                break;
+            case "reward":
+                handleReward(sender, args);
                 break;
             default:
-                sender.sendMessage("§cCommande inconnue. Utilisation: /kethertools <reload|update>");
+                sender.sendMessage("§cCommande inconnue. Utilisation: /kethertools <reload>");
                 break;
         }
 
@@ -74,7 +88,7 @@ public class KetherToolsCommand implements CommandExecutor {
         }
     }
 
-    private void handelPlaceholders(CommandSender sender) {
+    private void handlePlaceholders(CommandSender sender) {
         String key = "%kether_";
 
         ComponentBuilder message = new ComponentBuilder("§a=== KetherTools Placeholders ===\n");
@@ -93,6 +107,37 @@ public class KetherToolsCommand implements CommandExecutor {
         message.append("§a===============================");
 
         sender.spigot().sendMessage(message.create());
+    }
+
+    private void handleReward(CommandSender sender, String[] args) {
+            String PlayerName = args[3];
+            if (PlayerName.contains("%"))
+                PlayerName = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, args[3]);
+            Player player = Bukkit.getPlayer(PlayerName);
+
+            if (player == null) {
+                KetheriumTools.logInfo("Invalid player.");
+                return;
+            }
+
+            UUID playerUUID = player.getUniqueId();
+            String job = args[1];
+            int number = args.length > 2 ? Integer.parseInt(args[2]) : 1;
+            FileConfiguration configuration = plugin.getConfig();
+
+            List<String> jobs = plugin.getConfig().getStringList("jobs");
+            if (jobs.contains(job)) {
+                if (bdd.hasReward(playerUUID, job, number)) {
+                    if (!configuration.getString("rewardFailed").isEmpty())
+                        player.sendMessage(configuration.getString("rewardFailed"));
+                } else {
+                    bdd.addReward(playerUUID, job, number);
+                    if (!configuration.getString("rewardSuccess").isEmpty())
+                        player.sendMessage(configuration.getString("rewardSuccess"));
+                }
+            } else {
+                player.sendMessage("Job invalide.");
+            }
     }
 
 }

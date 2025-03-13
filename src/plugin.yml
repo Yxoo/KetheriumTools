@@ -8,7 +8,7 @@ softdepend: [PlaceholderAPI]
 commands:
   kethertools:
     description: Commande principale de KetheriumTools
-    usage: /kethertools <reload|placeholders>
+    usage: /kethertools <reload|placeholders|reward>
     permission: kethertools.admin
     aliases: [kether]
 

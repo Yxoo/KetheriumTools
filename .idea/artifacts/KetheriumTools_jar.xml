@@ -1,9 +1,9 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="KetheriumTools:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/KetheriumTools_jar</output-path>
+    <output-path>$PROJECT_DIR$/</output-path>
     <root id="archive" name="KetheriumTools.jar">
       <element id="module-output" name="KetheriumTools" />
-      <element id="extracted-dir" path="D:/API/spigot-api-1.21.4-R0.1-20250125.105843-29-shaded.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../API/spigot-api-1.21.4-R0.1-20250125.105843-29-shaded.jar" path-in-jar="/" />
       <element id="library" level="project" name="PlaceholderAPI-2.11.6" />
     </root>
   </artifact>

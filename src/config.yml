@@ -12,10 +12,14 @@ jobs:
   - "woodcutter"
   - "fisherman"
 
+rewardSuccess: "Récompense ajoutée avec succès."
+rewardFailed: "Vous avez déjà récupéré cette récompense."
+
 Ranks:
   rank1:
     char: ""
     name: "admin"
+    gift: 500
 
 
 jobsProgressBar:
